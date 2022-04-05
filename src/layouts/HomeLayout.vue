@@ -1,17 +1,67 @@
-<template>layout</template>
+<template>
+  <div class="layout">
+    <div class="layout__sidebar"><HomeSidebar /></div>
+    <div class="layout__content">
+      <div class="layout__header"><HomeHeader /></div>
+      <div class="layout__results">
+        <TracksView />
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import { useStore } from '@/store/index';
+import { defineAsyncComponent } from '@vue/runtime-core';
 
 export default {
+  components: {
+    HomeHeader: defineAsyncComponent(() =>
+      import('@/components/HomeHeader.vue')
+    ),
+    HomeSidebar: defineAsyncComponent(() =>
+      import('@/components/HomeSidebar.vue')
+    ),
+    TracksView: defineAsyncComponent(() => import('@/views/TracksView.vue')),
+  },
   setup() {
     const store = useStore();
 
     (async () => {
-      await store.dispatch('fetchTracks', 'eminem');
+      await store.dispatch('fetchTracks', 'grupo 5');
     })();
   },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+$sidebar-width: 300px;
+$header-height: 80px;
+
+.layout {
+  display: flex;
+
+  &__sidebar {
+    width: $sidebar-width;
+    height: 100%;
+    background-color: #662323;
+    position: fixed;
+  }
+
+  &__content {
+    margin-left: $sidebar-width;
+    width: calc(100% - $sidebar-width);
+  }
+
+  &__header {
+    position: fixed;
+    background-color: aquamarine;
+    width: 100%;
+    height: $header-height;
+  }
+
+  &__results {
+    margin-top: $header-height;
+  }
+}
+</style>
