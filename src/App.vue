@@ -7,7 +7,7 @@
       loader-color="#232406"
       bg-color="#fadd69"
     />
-    <PureLoader v-if="isLoading" />
+    <PureLoader v-if="isLoading && isLoaded" />
   </div>
   !
 </template>

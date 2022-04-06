@@ -38,7 +38,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 $sidebar-width: 300px;
-$header-height: 80px;
+$header-height: 90px;
 
 .layout {
   display: flex;
@@ -46,7 +46,7 @@ $header-height: 80px;
   &__sidebar {
     width: $sidebar-width;
     height: 100%;
-    background-color: #662323;
+    background-color: var(--primary-color);
     position: fixed;
   }
 
@@ -57,8 +57,7 @@ $header-height: 80px;
 
   &__header {
     position: fixed;
-    background-color: aquamarine;
-    width: 100%;
+    width: calc(100% - $sidebar-width);
     height: $header-height;
   }
 

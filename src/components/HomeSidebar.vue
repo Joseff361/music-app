@@ -1,3 +1,3 @@
 <template>
-  sidebar
+  <span></span>
 </template>
