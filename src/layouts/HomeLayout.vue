@@ -49,6 +49,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 $sidebar-width: 300px;
 $header-height: 90px;
+$player-height: 97px;
 
 .layout {
   display: flex;
@@ -73,12 +74,13 @@ $header-height: 90px;
 
   &__results {
     margin-top: $header-height;
+    margin-bottom: $player-height;
   }
 
   &__player {
     position: fixed;
     bottom: 0;
-    height: 97px;
+    height: $player-height;
     width: 100%;
   }
 }

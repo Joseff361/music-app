@@ -21,7 +21,16 @@
       ></i>
       <i class="fa-solid fa-forward" @click="next"></i>
     </div>
-    <div class="player__config">as</div>
+    <div class="player__config">
+      <input
+        type="range"
+        min="0"
+        max="100"
+        v-model="volume"
+        @change="changeVolume"
+      />
+      <i :class="volumenIcon" @click="changeVolState"></i>
+    </div>
   </div>
 </template>
 
@@ -35,22 +44,25 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const isPlaying = ref(true);
+    const volume = ref(15);
     const audio = computed(() => store.state.currentTrack.preview);
+    const volumenIcon = ref('fa-solid fa-volume-low');
 
     const maxIndex = store.state.tracks.length;
     const player = new Audio();
 
-    const play = () => {
+    const play = (): void => {
+      changeVolume();
       player.play();
       isPlaying.value = true;
     };
 
-    const pause = () => {
+    const pause = (): void => {
       player.pause();
       isPlaying.value = false;
     };
 
-    const next = () => {
+    const next = (): void => {
       const currentIndex = store.state.tracks.findIndex(
         track => track.id === store.state.currentTrack.id
       );
@@ -62,7 +74,7 @@ export default defineComponent({
       }
     };
 
-    const prev = () => {
+    const prev = (): void => {
       const currentIndex = store.state.tracks.findIndex(
         track => track.id === store.state.currentTrack.id
       );
@@ -74,21 +86,48 @@ export default defineComponent({
       }
     };
 
+    const updateIcon = (): void => {
+      volumenIcon.value =
+        player.volume > 0.6
+          ? 'fa-solid fa-volume-high'
+          : player.volume > 0
+          ? 'fa-solid fa-volume-low'
+          : 'fa-solid fa-volume-xmark';
+    };
+
+    const changeVolume = (): void => {
+      player.volume = volume.value / 100;
+      updateIcon();
+    };
+
+    const changeVolState = (): void => {
+      player.volume = player.volume > 0 ? 0 : volume.value / 100;
+      updateIcon();
+    };
+
     watch(audio, () => {
       player.src = audio.value;
       play();
     });
 
     return {
-      cover: computed(() => store.state.currentTrack.album.cover_medium),
-      title: computed(() => satinize(store.state.currentTrack.title)),
-      album: computed(() => satinize(store.state.currentTrack.album.title)),
+      cover: computed(
+        (): string => store.state.currentTrack.album.cover_medium
+      ),
+      title: computed((): string => satinize(store.state.currentTrack.title)),
+      album: computed((): string =>
+        satinize(store.state.currentTrack.album.title)
+      ),
+      volume,
       audio,
+      isPlaying,
+      volumenIcon,
       play,
       pause,
       next,
       prev,
-      isPlaying,
+      changeVolume,
+      changeVolState,
     };
   },
 });
@@ -146,6 +185,16 @@ export default defineComponent({
 
   &__config {
     width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    & i {
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
   }
 }
 </style>
