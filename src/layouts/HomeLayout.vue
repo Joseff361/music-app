@@ -7,13 +7,16 @@
         <TracksView />
       </div>
     </div>
+    <div v-if="currentTrack" class="layout__player">
+      <MusicPlayer />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from '@/store/index';
-import { defineAsyncComponent } from '@vue/runtime-core';
+import { computed, defineAsyncComponent } from '@vue/runtime-core';
 
 export default defineComponent({
   name: 'HomeLayout',
@@ -25,13 +28,20 @@ export default defineComponent({
       () => import('@/components/HomeSidebar.vue')
     ),
     TracksView: defineAsyncComponent(() => import('@/views/TracksView.vue')),
+    MusicPlayer: defineAsyncComponent(
+      () => import('@/components/MusicPlayer.vue')
+    ),
   },
   setup() {
     const store = useStore();
 
     (async () => {
-      await store.dispatch('fetchTracks', 'Grupo 5');
+      await store.dispatch('fetchTracks', 'Irrepelusa');
     })();
+
+    return {
+      currentTrack: computed(() => store.state.currentTrack),
+    };
   },
 });
 </script>
@@ -63,6 +73,13 @@ $header-height: 90px;
 
   &__results {
     margin-top: $header-height;
+  }
+
+  &__player {
+    position: fixed;
+    bottom: 0;
+    height: 97px;
+    width: 100%;
   }
 }
 </style>

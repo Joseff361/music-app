@@ -49,7 +49,7 @@ export default defineComponent({
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     padding: 15px;
     border-radius: 8px;
-    color: var(--primary-color);
+    color: #313131;
     font-size: 20px;
     transition: 0.4s;
 

@@ -41,7 +41,9 @@ export const store = createStore<State>({
       try {
         state.DZ?.api(`/search/track?q=${trackName}`, async response => {
           const { data } = response;
-          if (data.length > 0) commit('setTracks', data);
+          if (data.length > 0) {
+            commit('setTracks', data);
+          }
           commit('setLoad', false);
         });
       } catch (e) {

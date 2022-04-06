@@ -42,10 +42,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .loader {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;

@@ -11,6 +11,7 @@ export interface DeezerResponse {
 
 export interface Track {
   artist: Artist;
+  album: Album;
   duration: number;
   explicit_content_cover: number;
   explicit_content_lyrics: number;
