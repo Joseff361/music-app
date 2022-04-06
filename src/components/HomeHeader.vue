@@ -4,8 +4,13 @@
       type="text"
       v-model="track"
       @keypress.enter="searchTrack"
-      placeholder="Search your favorite track..."
+      placeholder="Search your favorite song..."
     />
+    <div class="header__link">
+      <a href="https://www.deezer.com/en/" target="_blank">
+        <img src="@/assets/deezer-logo.png" alt="Deezer Logo" />
+      </a>
+    </div>
   </header>
 </template>
 <script lang="ts">
@@ -61,6 +66,21 @@ export default defineComponent({
       color: #fff;
       background-color: #313131;
       box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__link {
+    width: 20%;
+
+    & a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & img {
+      max-width: 60%;
     }
   }
 }

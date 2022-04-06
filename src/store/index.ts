@@ -3,7 +3,6 @@ import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import { Deezer, Track } from '@/shared/interfaces';
 
 export interface State {
-  album: unknown;
   tracks: Track[];
   currentTrack: Track;
   DZ: Deezer | null;
@@ -14,7 +13,6 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
   state: {
-    album: null,
     tracks: [],
     currentTrack: {} as Track,
     DZ: null,

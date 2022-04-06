@@ -36,7 +36,7 @@ export default defineComponent({
     const store = useStore();
 
     (async () => {
-      await store.dispatch('fetchTracks', 'Irrepelusa');
+      await store.dispatch('fetchTracks', 'Los Outsaiders');
     })();
 
     return {
