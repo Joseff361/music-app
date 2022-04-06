@@ -10,17 +10,19 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { useStore } from '@/store/index';
 import { defineAsyncComponent } from '@vue/runtime-core';
 
-export default {
+export default defineComponent({
+  name: 'HomeLayout',
   components: {
-    HomeHeader: defineAsyncComponent(() =>
-      import('@/components/HomeHeader.vue')
+    HomeHeader: defineAsyncComponent(
+      () => import('@/components/HomeHeader.vue')
     ),
-    HomeSidebar: defineAsyncComponent(() =>
-      import('@/components/HomeSidebar.vue')
+    HomeSidebar: defineAsyncComponent(
+      () => import('@/components/HomeSidebar.vue')
     ),
     TracksView: defineAsyncComponent(() => import('@/views/TracksView.vue')),
   },
@@ -28,10 +30,10 @@ export default {
     const store = useStore();
 
     (async () => {
-      await store.dispatch('fetchTracks', 'grupo 5');
+      await store.dispatch('fetchTracks', 'Grupo 5');
     })();
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

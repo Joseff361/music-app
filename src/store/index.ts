@@ -5,6 +5,7 @@ import { Deezer, Track } from '@/shared/interfaces';
 export interface State {
   album: unknown;
   tracks: Track[];
+  currentTrack: Track;
   DZ: Deezer | null;
   isLoading: boolean;
 }
@@ -15,6 +16,7 @@ export const store = createStore<State>({
   state: {
     album: null,
     tracks: [],
+    currentTrack: {} as Track,
     DZ: null,
     isLoading: false,
   },
@@ -29,6 +31,9 @@ export const store = createStore<State>({
     setLoad: (state, value: boolean) => {
       state.isLoading = value;
     },
+    setCurrentTrack: (state, track: Track) => {
+      state.currentTrack = track;
+    },
   },
   actions: {
     fetchTracks: async ({ commit, state }, trackName) => {
@@ -36,11 +41,11 @@ export const store = createStore<State>({
       try {
         state.DZ?.api(`/search/track?q=${trackName}`, async response => {
           const { data } = response;
-          commit('setTracks', data);
+          if (data.length > 0) commit('setTracks', data);
+          commit('setLoad', false);
         });
       } catch (e) {
         console.log(e);
-      } finally {
         commit('setLoad', false);
       }
     },

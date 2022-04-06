@@ -1,8 +1,15 @@
 <template>
   <div class="main">
-    <span v-if="isLoaded"><HomeLayout /></span>
-    <span v-else>cargando...</span>
+    <HomeLayout v-if="isLoaded" />
+    <PureLoader
+      v-else
+      :has-image="true"
+      loader-color="#232406"
+      bg-color="#fadd69"
+    />
+    <PureLoader v-if="isLoading" />
   </div>
+  !
 </template>
 
 <script lang="ts">
@@ -22,6 +29,7 @@ export default defineComponent({
   name: 'App',
   components: {
     HomeLayout: defineAsyncComponent(() => import('@/layouts/HomeLayout.vue')),
+    PureLoader: defineAsyncComponent(() => import('@/layouts/PureLoader.vue')),
   },
   setup() {
     const store = useStore();
@@ -48,9 +56,15 @@ export default defineComponent({
 
     return {
       isLoaded: computed(() => store.state.DZ),
+      isLoading: computed(() => store.state.isLoading),
     };
   },
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.main {
+  width: 100%;
+  position: relative;
+}
+</style>
