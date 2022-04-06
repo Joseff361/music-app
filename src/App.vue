@@ -34,10 +34,17 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
+    const channelUrl =
+      process.env.NODE_ENV === 'production'
+        ? 'https://joseff361.github.io/world-app/channel.html'
+        : 'http://localhost:8080/channel.html';
+
+    console.log('channelUrl', channelUrl);
+
     window.dzAsyncInit = async () => {
       DZ.init({
         appId: '535602',
-        channelUrl: 'http://localhost:8080/channel.html',
+        channelUrl: channelUrl,
         player: {
           onload: () => {
             console.log('DZ isready!');
