@@ -140,7 +140,7 @@ export default defineComponent({
   display: flex;
 
   &__description {
-    width: 20%;
+    width: 30%;
     display: flex;
 
     & img {
@@ -164,7 +164,7 @@ export default defineComponent({
   }
 
   &__actions {
-    width: 60%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,7 +184,7 @@ export default defineComponent({
   }
 
   &__config {
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -194,6 +194,34 @@ export default defineComponent({
       cursor: pointer;
       font-size: 2rem;
       color: var(--primary-color);
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .player {
+    &__description {
+      display: none;
+    }
+
+    &__actions {
+      width: 60%;
+
+      & i {
+        font-size: 1rem;
+      }
+
+      &__play {
+        font-size: 2.5rem !important;
+      }
+    }
+
+    &__config {
+      width: 40%;
+
+      & i {
+        font-size: 1.3rem;
+      }
     }
   }
 }

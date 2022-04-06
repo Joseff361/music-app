@@ -50,6 +50,7 @@ export default defineComponent({
     background: none;
 
     width: 80%;
+    font-family: inherit;
     background-color: #f3f3f3;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
     padding: 15px;
@@ -81,6 +82,21 @@ export default defineComponent({
 
     & img {
       max-width: 60%;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header {
+    padding: 20px;
+
+    & input {
+      width: 100%;
+      font-size: 16px;
+    }
+
+    &__link {
+      display: none;
     }
   }
 }

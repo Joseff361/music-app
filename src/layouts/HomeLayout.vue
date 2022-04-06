@@ -84,4 +84,20 @@ $player-height: 97px;
     width: 100%;
   }
 }
+@media only screen and (max-width: 992px) {
+  .layout {
+    &__sidebar {
+      display: none;
+    }
+
+    &__content {
+      margin-left: 0px;
+      width: 100%;
+    }
+
+    &__header {
+      width: 100%;
+    }
+  }
+}
 </style>
