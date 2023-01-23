@@ -36,7 +36,7 @@ export default defineComponent({
 
     const channelUrl =
       process.env.NODE_ENV === 'production'
-        ? 'https://joseff361.github.io/world-app/channel.html'
+        ? 'https://joseff361.github.io/music-app/channel.html'
         : 'http://localhost:8080/channel.html';
 
     console.log('channelUrl', channelUrl);
